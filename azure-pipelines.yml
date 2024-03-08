@@ -9,13 +9,10 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '18.x'
-  displayName: 'Install Node.js'
+container: node:18-alpine
 
-- script: |
-    npm install
-    npm run build
-  displayName: 'npm install and build'
+steps:
+- task: Docker@2
+  inputs:
+    command: build
+    Dockerfile: '*/Dockerfile'
