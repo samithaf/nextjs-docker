@@ -10,7 +10,7 @@ pool:
   vmImage: ubuntu-latest
 
 container:
-  image: alpine:latest
+  image: node:18-alpine:latest
   env:
     RELEASE_MAJOR: $(Date:yyyyMMdd)
     RELEASE_MINOR: $(Rev:r)
