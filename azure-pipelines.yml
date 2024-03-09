@@ -9,10 +9,17 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-container: node:18-alpine
-
+container:
+  image: alpine:latest
+  env:
+    RELEASE_MAJOR: $(Date:yyyyMMdd)
+    RELEASE_MINOR: $(Rev:r)
+  volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
 steps:
 - task: Docker@2
+  displayName: Build
   inputs:
     command: build
-    Dockerfile: '*/Dockerfile'
+    tags: tag1
+    arguments: --secret id=mysecret,src=mysecret.txt
