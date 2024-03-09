@@ -9,17 +9,13 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-container:
-  image: node:18-alpine
-  env:
-    RELEASE_MAJOR: $(Date:yyyyMMdd)
-    RELEASE_MINOR: $(Rev:r)
-  volumes:
-    - /var/run/docker.sock:/var/run/docker.sock
 steps:
-- task: Docker@2
-  displayName: Build
+- task: NodeTool@0
   inputs:
-    command: build
-    tags: tag1
-    arguments: --secret id=mysecret,src=mysecret.txt
+    versionSpec: '18.x'
+  displayName: 'Install Node.js'
+
+- script: |
+    npm install
+    npm run build
+  displayName: 'npm install and build'
