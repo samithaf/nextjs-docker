@@ -83,7 +83,7 @@ RUN npm ci
 # Set Node env as production for the build
 ENV NODE_ENV production
 # run the build
-RUN npm run build
+RUN npm run ci:build
 
 FROM base as runner
 
