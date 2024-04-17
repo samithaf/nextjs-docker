@@ -14,5 +14,8 @@ pool:
 steps:
 - task: Docker@2
   inputs:
-    command: 'build'
+    command: build
     Dockerfile: '**/Dockerfile'
+    arguments: --no-cache
+  env:
+    DOCKER_BUILDKIT: 1
