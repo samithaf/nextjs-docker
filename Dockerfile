@@ -59,18 +59,6 @@ RUN mkdir -p "$HOME" && chown -R 1001:0 "$APP_ROOT" && chmod -R ug+rwx "$APP_ROO
 WORKDIR "$HOME"
 USER 1001
 
-FROM base as repository
-# Expose ARG VCS_URL & VCS_BRANCH to repository layer
-ARG VCS_URL
-ARG VCS_BRANCH
-# We need to install GIT so switch to a root user
-USER root
-RUN microdnf install git && microdnf clean all
-# Drop the root user and clone repo as user 1001
-USER 1001
-WORKDIR $HOME
-RUN git clone https://samithaf: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@github.com/samithaf/nextjs-docker.git .
-
 FROM base as builder
 # Copy the Repo to HOME
 COPY --from=repository $HOME .
