@@ -60,8 +60,9 @@ WORKDIR "$HOME"
 USER 1001
 
 FROM base as builder
+WORKDIR "$HOME"
 # Copy the Repo to HOME
-COPY --from=repository $HOME .
+COPY --from=repository . .
 # Set Node env as production so we are enabling tree shaking and prod optimisations
 ENV NODE_ENV test
 # Uncomment the following line in case you want to disable telemetry during the build.
