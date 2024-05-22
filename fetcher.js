@@ -4,6 +4,6 @@ async function download(){
       method: 'GET'
    })
    const buffer = await response.arrayBuffer()
-   fs.writeFileSync(`file${i}.txt`, Buffer.from(buffer))  
+   fs.writeFileSync(`file.txt`, Buffer.from(buffer))  
 }
 download()
