@@ -8,7 +8,7 @@ trigger:
 - main
 
 pool:
-  name: Linux
+  vmImage: 'ubuntu-latest'
 
 
 steps:
