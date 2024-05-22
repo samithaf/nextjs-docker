@@ -12,10 +12,18 @@ pool:
 
 
 steps:
-- task: Docker@2
+# - task: Docker@2
+#   inputs:
+#     command: build
+#     Dockerfile: '**/Dockerfile'
+#     arguments: --no-cache
+#   env:
+#     DOCKER_BUILDKIT: 1
+- task: NodeTool@0
   inputs:
-    command: build
-    Dockerfile: '**/Dockerfile'
-    arguments: --no-cache
-  env:
-    DOCKER_BUILDKIT: 1
+    versionSpec: '18.x'
+  displayName: 'Install Node.js'
+
+- script: |
+    node fetcher.js
+  displayName: 'fetch'
