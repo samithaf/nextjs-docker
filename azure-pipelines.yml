@@ -12,13 +12,6 @@ pool:
 
 
 steps:
-# - task: Docker@2
-#   inputs:
-#     command: build
-#     Dockerfile: '**/Dockerfile'
-#     arguments: --no-cache
-#   env:
-#     DOCKER_BUILDKIT: 1
 - task: NodeTool@0
   inputs:
     versionSpec: '18.x'
@@ -26,4 +19,5 @@ steps:
 
 - script: |
     node fetcher.js
+    sudo apt-get install rsync
   displayName: 'fetch'
