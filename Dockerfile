@@ -47,7 +47,7 @@ LABEL summary="$SUMMARY" \
 
 # Install Node.js packages and it's dependencies
 RUN --mount=type=secret,id=zscaler_cert,target=/etc/pki/ca-trust/source/anchors/zscaler.crt \
-    update-ca-trust && \
+    update-ca-trust \
     && INSTALL_PKGS="nodejs npm findutils tar which" \
     update-ca-trust && \
     microdnf -y module disable nodejs && \
