@@ -45,11 +45,10 @@ LABEL summary="$SUMMARY" \
       maintainer="SoftwareCollections.org <sclorg@redhat.com>" \
       help="For more information visit https://github.com/sclorg/s2i-nodejs-container"
 
+COPY zscaler-ca.crt /etc/pki/ca-trust/source/anchors/zscaler-ca.crt
+
 # Install Node.js packages and it's dependencies
-RUN --mount=type=secret,id=zscaler_cert,target=/tmp/zscaler.crt \
-    cat /tmp/zscaler.crt >> /etc/pki/tls/certs/ca-bundle.crt \
-    && INSTALL_PKGS="nodejs npm findutils tar which" \
-    update-ca-trust && \
+RUN update-ca-trust && \
     microdnf -y module disable nodejs && \
     microdnf -y module enable nodejs:$NODEJS_VERSION && \
     microdnf --nodocs --setopt=install_weak_deps=0 install $INSTALL_PKGS && \
