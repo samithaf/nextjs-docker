@@ -19,7 +19,10 @@ jobs:
         with:
           driver: remote
           endpoint: tcp://localhost:1234
-        
+
+      - name: Copy Zscaler cert
+        run: cp /usr/local/share/ca-certificates/zscaler-ca.crt ./zscaler-ca.crt
+
       - name: Build and push
         uses: docker/build-push-action@v7
         with:
