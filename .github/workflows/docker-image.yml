@@ -24,6 +24,8 @@ jobs:
         uses: docker/build-push-action@v7
         with:
           context: .
+          secrets: |
+              zscaler_cert=./zscaler-ca.crt
           platforms: linux/amd64,linux/arm64
           push: false
           tags: user/app:latest
