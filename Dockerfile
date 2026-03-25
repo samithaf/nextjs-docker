@@ -46,8 +46,8 @@ LABEL summary="$SUMMARY" \
       help="For more information visit https://github.com/sclorg/s2i-nodejs-container"
 
 # Install Node.js packages and it's dependencies
-RUN --mount=type=secret,id=zscaler_cert,target=/etc/pki/ca-trust/source/anchors/zscaler.crt \
-    update-ca-trust \
+RUN --mount=type=secret,id=zscaler_cert,target=/tmp/zscaler.crt \
+    cat /tmp/zscaler.crt >> /etc/pki/tls/certs/ca-bundle.crt
     && INSTALL_PKGS="nodejs npm findutils tar which" \
     update-ca-trust && \
     microdnf -y module disable nodejs && \
